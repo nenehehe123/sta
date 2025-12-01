@@ -1,0 +1,46 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+
+# Create a new instance of the Chrome driver
+driver = webdriver.Chrome()
+
+try:
+    # Open the e-commerce application URL
+    driver.get("https://example.com")
+
+    # -------------------------------
+    # Test Scenario 1: Search for a product
+    # -------------------------------
+    search_box = driver.find_element(By.NAME, "search")
+    search_box.send_keys("Selenium WebDriver")
+    search_box.send_keys(Keys.ENTER)
+
+    # Verify search results
+    search_results = driver.find_elements(By.CLASS_NAME, "product")
+
+    if len(search_results) > 0:
+        print("Test scenario 1 passed: Search results found")
+    else:
+        print("Test scenario 1 failed: No search results found")
+
+    # -------------------------------
+    # Test Scenario 2: Add a product to the cart
+    # -------------------------------
+    product_link = driver.find_element(By.LINK_TEXT, "Selenium WebDriver Book")
+    product_link.click()
+
+    add_to_cart_button = driver.find_element(By.CLASS_NAME, "add-to-cart")
+    add_to_cart_button.click()
+
+    # Verify the product is added to the cart
+    cart_count = driver.find_element(By.CLASS_NAME, "cart-count").text
+
+    if cart_count == "1":
+        print("Test scenario 2 passed: Product added to the cart")
+    else:
+        print("Test scenario 2 failed: Product not added to the cart")
+
+finally:
+    # Close the browser
+    driver.quit()
