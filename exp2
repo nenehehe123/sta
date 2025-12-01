@@ -1,0 +1,66 @@
+class ECommerceApp:
+    # Dummy methods for demonstration (replace with real logic)
+    def search_product(self, keyword):
+        if keyword.isalnum():
+            return ["Laptop 1", "Laptop 2"]
+        return []
+
+    def add_to_cart(self, product_id, quantity):
+        return True
+
+    def checkout(self, payment_method):
+        return True
+
+    def get_order_history(self):
+        return ["Order 1", "Order 2"]
+
+
+class ECommerceAppTestCases:
+    def __init__(self, ecommerce_app):
+        self.ecommerce_app = ecommerce_app
+
+    def test_product_search_valid_keyword(self):
+        # Test searching for a product with a valid keyword
+        keyword = "laptop"
+        search_results = self.ecommerce_app.search_product(keyword)
+        assert len(search_results) > 0, "No search results found"
+        print("Test passed: Product search with a valid keyword")
+
+    def test_product_search_invalid_keyword(self):
+        # Test searching for a product with an invalid keyword
+        keyword = "!@#$%"
+        search_results = self.ecommerce_app.search_product(keyword)
+        assert len(search_results) == 0, "Search results found for an invalid keyword"
+        print("Test passed: Product search with an invalid keyword")
+
+    def test_add_to_cart(self):
+        # Test adding a product to the cart
+        product_id = "12345"
+        quantity = 2
+        result = self.ecommerce_app.add_to_cart(product_id, quantity)
+        assert result is True, "Failed to add product to cart"
+        print("Test passed: Add to cart")
+
+    def test_checkout(self):
+        # Test the checkout process
+        payment_method = "credit_card"
+        result = self.ecommerce_app.checkout(payment_method)
+        assert result is True, "Checkout process failed"
+        print("Test passed: Checkout")
+
+    def test_order_history(self):
+        # Test viewing order history
+        order_history = self.ecommerce_app.get_order_history()
+        assert len(order_history) > 0, "No order history found"
+        print("Test passed: Order history")
+
+        
+# Usage Example
+ecommerce_app = ECommerceApp()  
+test_cases = ECommerceAppTestCases(ecommerce_app)
+
+test_cases.test_product_search_valid_keyword()
+test_cases.test_product_search_invalid_keyword()
+test_cases.test_add_to_cart()
+test_cases.test_checkout()
+test_cases.test_order_history()
