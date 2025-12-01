@@ -1,0 +1,28 @@
+from subprocess import Popen, PIPE
+import os
+
+def run_jmeter_test_plan(test_plan_file, jmeter_home):
+    # Set JMeter home path
+    os.environ['JMETER_HOME'] = jmeter_home
+
+    # Build command for JMeter execution
+    jmeter_bin = os.path.join(jmeter_home, "bin", "jmeter")
+    command = f'"{jmeter_bin}" -n -t "{test_plan_file}" -l result.jtl'
+
+    # Execute the command and capture output
+    process = Popen(command, shell=True, stdout=PIPE, stderr=PIPE)
+    stdout, stderr = process.communicate()
+
+    # Print output
+    print(stdout.decode())
+    print(stderr.decode())
+
+
+# Path to your JMeter Test Plan
+test_plan_file = "path/to/your/test_plan.jmx"
+
+# Path to your JMeter installation
+jmeter_home = "path/to/your/jmeter/home"
+
+# Run the JMeter Test Plan
+run_jmeter_test_plan(test_plan_file, jmeter_home)
