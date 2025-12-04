@@ -44,3 +44,10 @@ try:
 finally:
     # Close the browser
     driver.quit()
+
+
+
+
+
+Test scenario passed: Search results found
+Test scenario 2 passed: Product added to the cart
